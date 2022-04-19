@@ -69,8 +69,10 @@ public class MakeCode {
         while (temp != null) {
             if (temp.contains("=")) {
                 String[] tempStringArr = temp.split("=");
-                if (tempStringArr[0].startsWith("item."))
-                    writer.println(getItemCode(tempStringArr[0], tempStringArr[1]));
+                if (tempStringArr[0].startsWith("item.") && !tempStringArr[0].endsWith(".sign"))
+                    writer.println(getItemCode(tempStringArr[0]));
+                else if (tempStringArr[0].startsWith("block.minecraft."))
+                    writer.println(getItemCodeBlock(tempStringArr[0]));
             }
             temp = reader.readLine();
         }
@@ -78,10 +80,17 @@ public class MakeCode {
         reader.close();
     }
 
-    private static String getItemCode(String unlocalized, String name) {
+    private static String getItemCode(String name) {
         StringBuilder code = new StringBuilder();
-        code.append(name.replaceAll(" ", "_").toUpperCase());
-        code.append("(Material.").append(name.replaceAll(" ", "_").toUpperCase()).append(" ,").append("\"").append(unlocalized).append("\"").append("),");
+        code.append(name.replace("item.minecraft.", "").replace(".", "_").toUpperCase());
+        code.append("(Material.").append(name.replace("item.minecraft.", "").replace(".", "_").toUpperCase()).append(" ,").append("\"").append(name).append("\"").append("),");
+        return code.toString();
+    }
+    private static String getItemCodeBlock(String name) {
+        if (Material)name.replace("block.minecraft.", "").replace(".", "_").toUpperCase()
+        StringBuilder code = new StringBuilder();
+        code.append(name.replace("block.minecraft.", "").replace(".", "_").toUpperCase());
+        code.append("(Material.").append(name.replace("block.minecraft.", "").replace(".", "_").toUpperCase()).append(" ,").append("\"").append(name).append("\"").append("),");
         return code.toString();
     }
     public static void genEnchantmentCode() throws IOException {

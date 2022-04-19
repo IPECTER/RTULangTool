@@ -5,7 +5,7 @@ plugins {
 }
 
 mainClassName = 'com.github.ipecter.rtu.langAPI.tool.MakeCode'
-version = '1.0.0'
+version = '1.1.0'
 jar {
     manifest {
         attributes  'Title': 'RTULangTool', 'Version': version, 'Main-Class': mainClassName
@@ -13,7 +13,21 @@ jar {
     archiveName 'RTULangTool-' + version + '.jar'
 
 }
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
 
+
+
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
+}
 def targetJavaVersion = 16
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
