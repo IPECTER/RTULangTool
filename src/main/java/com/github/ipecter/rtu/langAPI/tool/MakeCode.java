@@ -1,10 +1,11 @@
 package com.github.ipecter.rtu.langAPI.tool;
 
+import org.bukkit.Material;
+
 import java.io.*;
 
 
 public class MakeCode {
-
     public static void main(String[] args) throws IOException {
             genLangCode();
             genEntityCode();
@@ -87,7 +88,7 @@ public class MakeCode {
         return code.toString();
     }
     private static String getItemCodeBlock(String name) {
-        if (Material)name.replace("block.minecraft.", "").replace(".", "_").toUpperCase()
+        //if (Material.valueOf(name.replace("block.minecraft.", "").replace(".", "_").toUpperCase()) != null)
         StringBuilder code = new StringBuilder();
         code.append(name.replace("block.minecraft.", "").replace(".", "_").toUpperCase());
         code.append("(Material.").append(name.replace("block.minecraft.", "").replace(".", "_").toUpperCase()).append(" ,").append("\"").append(name).append("\"").append("),");
